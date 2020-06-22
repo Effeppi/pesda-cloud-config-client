@@ -3,14 +3,15 @@
 Node-spring-cloud-config-client is a typescript implementation of spring cloud config client for node js.
 
 ![Build](https://github.com/Effeppi/node-spring-cloud-config-client/workflows/Build/badge.svg?branch=master)
+[![LICENSE](https://img.shields.io/github/license/Effeppi/node-spring-cloud-config-client?label=License)](LICENSE)
 
 ## Install
 
 ```bash
-# with npm
+# Using npm
 npm install node-spring-cloud-config-client
 
-# or with Yarn
+# Using yarn
 yarn add node-spring-cloud-config-client
 ```
 
