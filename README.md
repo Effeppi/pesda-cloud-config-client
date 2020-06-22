@@ -1,6 +1,7 @@
 # Node Spring Cloud Config Client
 
-Node-spring-cloud-config-client is a typescript implementation of spring cloud config client for node js.
+Node Spring Cloud Config Client provide client-side support to get the nodejs server configurations in a distributed system from a service build with use of Spring Cloud Config Server.
+
 
 [![GitHub](https://img.shields.io/badge/GitHub-0.1.0-blue)](https://github.com/Effeppi/node-spring-cloud-config-client/tree/0.1.0)
 ![Build](https://github.com/Effeppi/node-spring-cloud-config-client/workflows/Build/badge.svg?branch=release/0.1.0)
@@ -8,7 +9,7 @@ Node-spring-cloud-config-client is a typescript implementation of spring cloud c
 [![Issue](https://img.shields.io/github/issues/Effeppi/node-spring-cloud-config-client?label=Issues)](https://github.com/Effeppi/node-spring-cloud-config-client/issues)
 [![npm version](https://img.shields.io/badge/npm-0.1.0-red)](https://www.npmjs.com/package/node-spring-cloud-config-client/v/0.1.0)
 
-
+---
 ## Install
 
 ```bash
@@ -48,7 +49,7 @@ const result = await propertySourcesContext.load()
 ```
 
 
-After load method, you can access data from env with process.env:
+After load method, you can access environment variables from env with process.env:
 
 ```javascript
 const database_password = process.env['db.password']
@@ -58,7 +59,7 @@ const database_password = process.env['db.password']
 
 ## Options
 
-### client configuration
+### Target config server
 
 Properties dictionary:
 
@@ -139,3 +140,10 @@ Properties dictionary
 You may turn on/off the log with property NSCCC_LOGGER_ENABLED. 
 
 You can specify level log with property NSCCC_LOGGER_LEVEL.
+
+
+## More Documentation
+For more documentation and information, visit this [guide](https://github.com/Effeppi/node-spring-cloud-config-client/wiki).
+
+## Example usage
+You can visit this [repository](https://github.com/Effeppi/node-spring-cloud-config-client-example) for other example of node-spring-cloud-config-client usage.
