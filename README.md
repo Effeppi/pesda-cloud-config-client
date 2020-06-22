@@ -111,6 +111,8 @@ This property specify how much times the node js server retry to get properties 
 ### NSCCC_SCALING_DURATION_MS
 This property specify how much delay beatween two retry.
 
+The delay is expressed in milliseconds.
+
 The duration is calculated by NSCCC_SCALING_DURATION_MS multiplied by attempts number. ( [Config client retry](#Config%20client%20retry) )
 * Default: 1000
 * Type: number
