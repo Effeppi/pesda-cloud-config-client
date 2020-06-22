@@ -1,0 +1,33 @@
+{
+  "name": "node-spring-cloud-config-client",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "A node js implementation of spring cloud config client. ",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "spring-cloud-config-client",
+    "node-spring-cloud-config-client"
+  ],
+  "author": "Francesco Pes",
+  "license": "MIT",
+  "homepage": "https://github.com/Effeppi/node-spring-cloud-config-client/wiki",
+  "url": "https://github.com/Effeppi/node-spring-cloud-config-client/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Effeppi/node-spring-cloud-config-client.git"
+  },
+  "dependencies": {
+    "axios": "~0.19.2",
+    "rxjs": "~6.5.5"
+  },
+  "devDependencies": {
+    "@types/axios": "~0.14.0",
+    "@types/node": "~14.0.13",
+    "typescript": "~3.9.5"
+  },
+  "files": [
+    "lib/"
+  ]
+}

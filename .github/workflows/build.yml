@@ -1,0 +1,26 @@
+name: Build
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout repo
+    - uses: actions/checkout@v1
+    # Setup .npmrc file to publish to npm
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install
+      uses: CultureHQ/actions-yarn@master
+      with:
+        args: install
+    - name: Build
+      uses: CultureHQ/actions-yarn@master
+      with:
+        args: build
+    - name: Branch name
+      run: echo running on branch ${GITHUB_REF} - ${GITHUB_REF##*/}
