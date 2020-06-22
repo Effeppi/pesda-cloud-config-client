@@ -1,8 +1,8 @@
-name: Build
+name: Build & Deploy on NPM
 on:
   push:
     branches:
-      - develop
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,3 +22,7 @@ jobs:
       uses: CultureHQ/actions-yarn@master
       with:
         args: build
+    - name: Publish to npm
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
