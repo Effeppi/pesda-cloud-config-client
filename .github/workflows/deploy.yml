@@ -1,4 +1,4 @@
-name: Build & Deploy on NPM
+name: CI-CD
 on:
   push:
     tags:

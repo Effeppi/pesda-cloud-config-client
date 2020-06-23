@@ -4,7 +4,7 @@ PesDa Cloud Config Client provide client-side support that connects to a Spring 
 
 
 [![GitHub](https://img.shields.io/badge/GitHub-0.1.0-blue)](https://github.com/Effeppi/pesda-cloud-config-client/tree/0.1.0)
-![Build](https://github.com/Effeppi/pesda-cloud-config-client/workflows/Build/badge.svg?branch=release/0.1.0)
+![CI-CD](https://github.com/Effeppi/pesda-cloud-config-client/workflows/CI-CD/badge.svg?branch=0.1.0)
 [![LICENSE](https://img.shields.io/github/license/Effeppi/pesda-cloud-config-client?label=License)](LICENSE)
 [![Issue](https://img.shields.io/github/issues/effeppi/pesda-cloud-config-client?label=Issues)](https://github.com/Effeppi/pesda-cloud-config-client/issues)
 [![npm version](https://img.shields.io/badge/npm-0.1.0-red)](https://www.npmjs.com/package/pesda-cloud-config-client/v/0.1.0)
