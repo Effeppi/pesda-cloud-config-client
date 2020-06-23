@@ -31,7 +31,7 @@ export class PropertySourcesContext {
         return this._propertySources;
     }
 
-    public load(): Observable<PropertySources[]> {
+    public loadProperties$(): Observable<PropertySources[]> {
 
         const LOGGER = Logger.getLogger();
 
@@ -49,8 +49,17 @@ export class PropertySourcesContext {
         const observable$ = new Observable<SpringCloudConfigServerResponse>(subscriber => {
 
             axiosInstance.request<SpringCloudConfigServerResponse>({ baseURL: url })
-                .then(v => subscriber.next(v.data), err => subscriber.error(err))
-                .catch(reason => console.log(reason))
+                .then(v => {
+                    subscriber.next(v.data)
+                }, err => {
+                    subscriber.error(err)
+                })
+                .catch(reason => {
+                    console.log(reason)
+                })
+                .finally(() => {
+                    subscriber.complete()
+                })
         })
 
         let observableResult$: Observable<PropertySources[]>;
