@@ -1,15 +1,16 @@
 import { ServerConfiguration, ErrorConfiguration, RetryStrategyConfig } from "../model";
 import { Environment } from "./env-enum";
 import { isURL } from "../util";
-import { Logger } from "./log";
 
 export class ClientConfiguration {
+
+    private readonly DEFAULT_MAX_RETRY_ATTEMPTS = 6;
+    private readonly DEFAULT_SCALING_DURATION = 1000;
 
     private static _instance: ClientConfiguration;
     private _server: ServerConfiguration = { applicationName: 'application', baseUri: 'http://localhost:8888', profile: 'default' };
     private _error: ErrorConfiguration = { failFast: false };
-    private readonly LOGGER = Logger.getLogger();
-    
+
     private constructor() {
         this.propertiesFromEnvironment();
         this.validate();
@@ -24,10 +25,19 @@ export class ClientConfiguration {
     }
 
     get retry() {
-        const retryStrategy: RetryStrategyConfig = {
-            maxRetryAttempts: this._error.maxRetryAttempts || 6,
-            scalingDuration: this._error.scalingDuration || 1000,
-        }
+        const maxRetryAttempts = (typeof this._error.maxRetryAttempts === 'number'
+            && !isNaN(this._error.maxRetryAttempts))
+            ? this._error.maxRetryAttempts
+            : this.DEFAULT_MAX_RETRY_ATTEMPTS
+
+
+        const scalingDuration = (typeof this._error.scalingDuration === 'number'
+            && !isNaN(this._error.scalingDuration))
+            ? this._error.scalingDuration
+            : this.DEFAULT_SCALING_DURATION
+
+        const retryStrategy: RetryStrategyConfig = { maxRetryAttempts, scalingDuration }
+
         return this._error.failFast ? retryStrategy : undefined;
     }
 
@@ -52,7 +62,7 @@ export class ClientConfiguration {
     }
 
     private validate() {
-        if(!isURL(this._server.baseUri)) {
+        if (!isURL(this._server.baseUri)) {
             this.throwInvalidURIError('baseUri', this._server.baseUri)
         }
     }
@@ -77,7 +87,7 @@ export class ClientConfiguration {
         }
 
         if (baseUri) {
-            this._server = { ...this._server, baseUri}
+            this._server = { ...this._server, baseUri }
         }
 
         if (profile) {
@@ -98,14 +108,14 @@ export class ClientConfiguration {
         }
 
 
-        if (this._error.failFast && NSCCC_MAX_RETRY_ATTEMPTS) {
-            const maxRetryAttemptParsed = parseInt(NSCCC_MAX_RETRY_ATTEMPTS);
-            this._error = { ...this._error, maxRetryAttempts: maxRetryAttemptParsed }
+        if (this._error.failFast && typeof NSCCC_MAX_RETRY_ATTEMPTS !== 'undefined') {
+            const maxRetryAttempts = parseInt(NSCCC_MAX_RETRY_ATTEMPTS);
+            this._error = { ...this._error, maxRetryAttempts }
         }
 
-        if (this._error.failFast && NSCCC_SCALING_DURATION) {
-            const scalingDurationParsed = parseInt(NSCCC_SCALING_DURATION);
-            this._error = { ...this._error, scalingDuration: scalingDurationParsed }
+        if (this._error.failFast && typeof NSCCC_SCALING_DURATION !== 'undefined') {
+            const scalingDuration = parseInt(NSCCC_SCALING_DURATION);
+            this._error = { ...this._error, scalingDuration }
         }
 
     }
@@ -120,8 +130,7 @@ export class ClientConfiguration {
 
     private throwInvalidURIError(key: string, value?: string) {
         const msg = `${key} is not a valid url: ${value}`;
-        this.LOGGER.error(msg)
-        throw new Error(msg);
+        throw new TypeError(msg);
 
     }
 

@@ -1,7 +1,7 @@
 import { Observable, throwError, timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { RetryStrategyConfig } from '../model';
-import { Logger } from '../service';
+import { Logger } from '../util';
 
 export const retryStrategy = (cfg: RetryStrategyConfig) => (attempts: Observable<any>) => {
   return attempts.pipe(
@@ -14,6 +14,7 @@ export const retryStrategy = (cfg: RetryStrategyConfig) => (attempts: Observable
 
       LOGGER.error(`Path: ${error.config.baseURL}`)
 
+      
       if (retryAttempt > cfg.maxRetryAttempts) {
         LOGGER.error(`Max retry attempt.`)
         return throwError(error);

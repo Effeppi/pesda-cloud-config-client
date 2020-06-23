@@ -1,5 +1,5 @@
 import { LoggerConfig, LoggerLevel } from "../model";
-import { Environment } from "./env-enum";
+import { LogConfiguration } from '../context/log-config';
 
 enum LogColor {
     error = '\x1b[31m%s\x1b[0m',
@@ -22,47 +22,22 @@ export class Logger {
     }
 
     private static _instance: Logger;
-    private _options: LoggerConfig = { enabled: false };
+    private _options: LoggerConfig = LogConfiguration.getInstance().options;
 
-    private constructor(opt?: LoggerConfig) {
-        if (opt) this._options = opt;
-    this.parseEnvironmentValue()
+    private constructor() {
+
     }
 
-    static getLogger(loggerOptions?: LoggerConfig): Logger {
+    static getLogger(): Logger {
         if (!this._instance) {
 
-            this._instance = new Logger(loggerOptions);
+            this._instance = new Logger();
         }
 
 
         return this._instance;
     }
 
-    private parseEnvironmentValue() {
-        const enabled = process.env[Environment.LOGGER_ENABLED]
-
-        const level = process.env[Environment.LOGGER_LEVEL];
-
-        if(enabled) {
-            const enabledParsed = enabled.toLowerCase() === 'true' ? true : false
-            this._options = {
-                ...this._options, enabled: enabledParsed
-            }
-        }
-
-        if(level === LoggerLevel.debug.toString() || level === LoggerLevel.info.toString() ) {
-            this._options = {
-                ...this._options, level
-            }
-        } else {
-            this._options = {
-                ...this._options, level: LoggerLevel.error.toString()
-            }
-
-        }
-
-    }
 
     debug(msg: string) {
         if (this._options.level === LoggerLevel.debug.toString())
@@ -71,9 +46,9 @@ export class Logger {
 
     info(msg: string) {
         if (this._options.level === LoggerLevel.debug.toString()
-        || this._options.level === LoggerLevel.info.toString())
+            || this._options.level === LoggerLevel.info.toString())
 
-        this.log(msg, this.LOG_CONSOLE_CONFIG.info);
+            this.log(msg, this.LOG_CONSOLE_CONFIG.info);
     }
 
     error(msg: string) {
@@ -82,7 +57,6 @@ export class Logger {
 
 
     private log(msg: string, level: LogConfig) {
-        console.log(this._options.enabled)
         if (this._options.enabled) {
 
             console.log(

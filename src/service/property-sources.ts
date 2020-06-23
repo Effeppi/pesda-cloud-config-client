@@ -2,8 +2,9 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { of, Observable } from 'rxjs';
 import { retryWhen, map, catchError, take } from 'rxjs/operators';
 import { SpringCloudConfigServerResponse, PropertySources } from '../model';
-import { ClientConfiguration, Logger } from '.';
 import { retryStrategy } from '../util/retry-strategy';
+import { Logger } from '../util';
+import { ClientConfiguration } from '../context';
 
 
 export class PropertySourcesContext {
@@ -27,7 +28,7 @@ export class PropertySourcesContext {
     }
 
 
-    get propertySources() {
+    public get propertySources(): PropertySources[] {
         return this._propertySources;
     }
 
@@ -50,15 +51,13 @@ export class PropertySourcesContext {
 
             axiosInstance.request<SpringCloudConfigServerResponse>({ baseURL: url })
                 .then(v => {
-                    subscriber.next(v.data)
+                    subscriber.next(v.data);
+                    subscriber.complete()
                 }, err => {
-                    subscriber.error(err)
+                    subscriber.error(err);
                 })
                 .catch(reason => {
-                    console.log(reason)
-                })
-                .finally(() => {
-                    subscriber.complete()
+                    console.log(reason);
                 })
         })
 
@@ -92,7 +91,6 @@ export class PropertySourcesContext {
         } else {
             observableResult$ = observable$.pipe(
                 catchError(error => {
-                    console.log(process.env['NSCCC_LOGGER_LEVEL'])
                     LOGGER.debug(`${error}. You see this error because failFast property is set to false. `)
                     return of(undefined)
                 }),
