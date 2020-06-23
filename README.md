@@ -1,6 +1,6 @@
 # PesDa Cloud Config Client
 
-PesDa Cloud Config Client provide client-side support that connects to a Spring Cloud Config Server to fetch the node js application's configuration.
+PesDa Cloud Config Client provide client-side support to connect to a Spring Cloud Config Server to fetch the node js application's configurations.
 
 
 [![GitHub](https://img.shields.io/badge/GitHub-0.1.0-blue)](https://github.com/Effeppi/pesda-cloud-config-client/tree/0.1.0)
