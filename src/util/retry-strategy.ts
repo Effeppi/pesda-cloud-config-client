@@ -3,7 +3,7 @@ import { mergeMap } from 'rxjs/operators';
 import { RetryStrategyConfig } from '../model';
 import { Logger } from '../util';
 
-export const retryStrategy = (cfg: RetryStrategyConfig) => (attempts: Observable<any>) => {
+export const retryStrategy$ = (cfg: RetryStrategyConfig) => (attempts: Observable<any>) => {
   return attempts.pipe(
     mergeMap((error, i) => {
       const LOGGER = Logger.getLogger();

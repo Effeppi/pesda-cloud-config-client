@@ -2,8 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { of, Observable } from 'rxjs';
 import { retryWhen, map, catchError, take } from 'rxjs/operators';
 import { SpringCloudConfigServerResponse, PropertySources } from '../model';
-import { retryStrategy } from '../util/retry-strategy';
-import { Logger } from '../util';
+import { Logger, retryStrategy$ } from '../util';
 import { ClientConfiguration } from '../context';
 
 
@@ -57,7 +56,7 @@ export class PropertySourcesContext {
                     subscriber.error(err);
                 })
                 .catch(reason => {
-                    console.log(reason);
+                    LOGGER.error(reason)
                 })
         })
 
@@ -65,7 +64,7 @@ export class PropertySourcesContext {
 
         if (options.retry) {
             observableResult$ = observable$.pipe(
-                retryWhen(retryStrategy(options.retry)),
+                retryWhen(retryStrategy$(options.retry)),
                 take(1),
                 map(v => {
                     let result: PropertySources[] = [];

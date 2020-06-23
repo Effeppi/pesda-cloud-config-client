@@ -1,5 +1,5 @@
 import { LoggerConfig, LoggerLevel } from "../model";
-import { LogConfiguration } from '../context/log-config';
+import { LogConfiguration } from '../context';
 
 enum LogColor {
     error = '\x1b[31m%s\x1b[0m',
@@ -12,7 +12,7 @@ interface LogConfig {
     color: LogColor
 }
 
-const PROJECT_NAME = 'node-spring-cloud-config-client'
+const PROJECT_NAME = 'pesda-cloud-config-client'
 
 export class Logger {
     private readonly LOG_CONSOLE_CONFIG = {

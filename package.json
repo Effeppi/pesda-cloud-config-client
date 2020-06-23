@@ -1,5 +1,5 @@
 {
-  "name": "node-spring-cloud-config-client",
+  "name": "pesda-cloud-config-client",
   "version": "0.1.0-SNAPSHOT",
   "description": "A node js implementation of spring cloud config client. ",
   "main": "lib/index.js",
@@ -8,15 +8,17 @@
   },
   "keywords": [
     "spring-cloud-config-client",
-    "node-spring-cloud-config-client"
+    "node-spring-cloud-config-client",
+    "microservice",
+    "spring cloud config client"
   ],
   "author": "Francesco Pes",
   "license": "MIT",
-  "homepage": "https://github.com/Effeppi/node-spring-cloud-config-client/wiki",
+  "homepage": "https://github.com/Effeppi/pesda-cloud-config-client/wiki",
   "url": "https://github.com/Effeppi/node-spring-cloud-config-client/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Effeppi/node-spring-cloud-config-client.git"
+    "url": "https://github.com/Effeppi/pesda-cloud-config-client.git"
   },
   "dependencies": {
     "axios": "~0.19.2",
