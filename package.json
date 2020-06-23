@@ -1,6 +1,6 @@
 {
   "name": "pesda-cloud-config-client",
-  "version": "0.1.0-SNAPSHOT",
+  "version": "0.1.0",
   "description": "A node js implementation of spring cloud config client. ",
   "main": "lib/index.js",
   "scripts": {
