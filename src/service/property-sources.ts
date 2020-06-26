@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { of, Observable } from 'rxjs';
 import { retryWhen, map, catchError, take } from 'rxjs/operators';
 import { SpringCloudConfigServerResponse, PropertySources } from '../model';
@@ -37,8 +37,9 @@ export class PropertySourcesContext {
 
         const options = ClientConfiguration.getInstance();
 
-        const url = options.url
+        const baseURL = options.url
 
+        const timeout = options.clientRequestTimeout ;
 
         const axiosInstance = axios.create()
 
@@ -48,8 +49,8 @@ export class PropertySourcesContext {
 
         const observable$ = new Observable<SpringCloudConfigServerResponse>(subscriber => {
 
-            axiosInstance.request<SpringCloudConfigServerResponse>({ baseURL: url })
-                .then(v => {
+            axiosInstance.request<SpringCloudConfigServerResponse>({ baseURL, timeout})
+                .then((v: AxiosResponse<SpringCloudConfigServerResponse>) => {
                     subscriber.next(v.data);
                     subscriber.complete()
                 }, err => {

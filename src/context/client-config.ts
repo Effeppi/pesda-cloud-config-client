@@ -7,8 +7,16 @@ export class ClientConfiguration {
     private readonly DEFAULT_MAX_RETRY_ATTEMPTS = 6;
     private readonly DEFAULT_SCALING_DURATION = 1000;
 
+    private readonly DEFAULT_SERVER_CONFIGURATION = {
+        applicationName: 'application',
+        baseUri: 'http://localhost:8888',
+        profile: 'default',
+        clientRequestTimeout: 120000 
+    };
+
+
     private static _instance: ClientConfiguration;
-    private _server: ServerConfiguration = { applicationName: 'application', baseUri: 'http://localhost:8888', profile: 'default' };
+    private _server: ServerConfiguration = this.DEFAULT_SERVER_CONFIGURATION;
     private _error: ErrorConfiguration = { failFast: false };
 
     private constructor() {
@@ -22,6 +30,10 @@ export class ClientConfiguration {
         }
 
         return this._instance;
+    }
+
+    get clientRequestTimeout() {
+        return this._server.clientRequestTimeout;
     }
 
     get retry() {
@@ -76,6 +88,8 @@ export class ClientConfiguration {
 
         const label = process.env[Environment.LABEL];
 
+        const REQUEST_TIMEOUT = process.env[Environment.REQUEST_TIMEOUT];
+
         const NSCCC_FAIL_FAST = process.env[Environment.FAIL_FAST];
 
         const NSCCC_MAX_RETRY_ATTEMPTS = process.env[Environment.MAX_RETRY_ATTEMPTS];
@@ -91,12 +105,19 @@ export class ClientConfiguration {
         }
 
         if (profile) {
-            this._server = { ...this._server, profile: profile }
+            this._server = { ...this._server, profile }
         }
 
         if (label) {
-            this._server = { ...this._server, label: label }
+            this._server = { ...this._server, label }
 
+        }
+
+        if (typeof REQUEST_TIMEOUT !== 'undefined') {
+            const clientRequestTimeout = parseInt(REQUEST_TIMEOUT);
+            if (!isNaN(clientRequestTimeout)) {
+                this._server = { ...this._server, clientRequestTimeout }
+            } 
         }
 
         if (NSCCC_FAIL_FAST) {

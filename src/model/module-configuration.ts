@@ -9,6 +9,7 @@ export interface ServerConfiguration {
     baseUri: string,
     profile?: string,
     label?: string,
+    clientRequestTimeout: number,
 }
 
 export interface ErrorConfiguration {
