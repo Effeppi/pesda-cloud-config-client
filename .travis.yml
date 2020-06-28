@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-- '8'
+- '10'
 branches:
   only:
   - feature/add_request_timeout
@@ -14,3 +14,5 @@ install:
 - npm install
 script:
 - npm test
+script:
+- npm run build
