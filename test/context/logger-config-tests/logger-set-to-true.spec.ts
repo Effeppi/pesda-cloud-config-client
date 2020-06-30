@@ -1,7 +1,7 @@
-import * as clientConfig from '../../../src/context'
+import * as context from '../../../src/context'
 
 
-describe('Client config', () => {
+describe('Logger config', () => {
     const OLD_ENV = process.env;
 
     beforeEach(() => {
@@ -15,9 +15,9 @@ describe('Client config', () => {
     });
 
     test('Set logger to true', () => {
-        process.env[clientConfig.Environment.LOGGER_ENABLED] = 'true';
+        process.env[context.Environment.LOGGER_ENABLED] = 'true';
 
-        const test = clientConfig.LogConfiguration.getInstance()
+        const test = context.LogConfiguration.getInstance()
 
         expect(test.options.enabled).toBe(true)
         expect(test.options.level).toBe('error')

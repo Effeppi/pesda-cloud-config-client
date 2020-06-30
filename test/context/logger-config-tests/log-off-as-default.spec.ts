@@ -1,6 +1,6 @@
-import * as clientConfig from '../../../src/context'
+import * as context from '../../../src/context'
 
-describe('Client config', () => {
+describe('Logger config', () => {
     const OLD_ENV = process.env;
 
     beforeEach(() => {
@@ -16,7 +16,7 @@ describe('Client config', () => {
 
     test('Check log is disabled as default', () => {
 
-        const test = clientConfig.LogConfiguration.getInstance()
+        const test = context.LogConfiguration.getInstance()
 
         expect(test.options.enabled).toBe(false)
 
