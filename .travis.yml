@@ -25,8 +25,5 @@ deploy:
   email: "NPM_EMAIL"
   api_key: "NPM_AUTH_TOKEN"
   on:
-    branches:    
-      only:      
-        - feature/add_request_timeout
-        - develop
-        - master
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^(feature|develop|master)$
