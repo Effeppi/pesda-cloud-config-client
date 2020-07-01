@@ -24,6 +24,7 @@ deploy:
   provider: npm
   email: "NPM_EMAIL"
   api_key: "NPM_AUTH_TOKEN"
+  skip_cleanup: true
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(develop|master)$|^(feature\/)
