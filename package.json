@@ -4,7 +4,9 @@
   "description": "A node js implementation of spring cloud config client. ",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "test:c": "jest --coverage"
   },
   "keywords": [
     "spring-cloud-config-client",
@@ -26,7 +28,13 @@
   },
   "devDependencies": {
     "@types/axios": "~0.14.0",
+    "@types/jest": "^26.0.3",
     "@types/node": "~14.0.13",
+    "coveralls": "^3.1.0",
+    "cross-env": "^7.0.2",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.1",
+    "ts-node": "^8.10.2",
     "typescript": "~3.9.5"
   },
   "files": [

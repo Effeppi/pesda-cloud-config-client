@@ -1,3 +1,6 @@
+/* istanbul ignore file */
+
+
 import { Observable, throwError, timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { RetryStrategyConfig } from '../model';

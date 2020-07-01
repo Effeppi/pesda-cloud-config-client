@@ -1,3 +1,6 @@
+/* istanbul ignore file */
+
+
 import { LoggerConfig, LoggerLevel } from "../model";
 import { LogConfiguration } from '../context';
 
