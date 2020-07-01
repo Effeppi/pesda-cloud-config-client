@@ -4,7 +4,7 @@ node_js:
 - '10'
 branches:
   only:
-  - feature/*
+  - feature/add_request_timeout
   - develop
 cache:
   directories:
@@ -17,7 +17,7 @@ test:
 - npm test
 build:
 - npm run build
-prepare_deploy:
+before_deploy:
 - node script/snapshot-version.js
 deploy:
   provider: npm
