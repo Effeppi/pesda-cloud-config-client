@@ -9,7 +9,7 @@ if(version.endsWith('-SNAPSHOT')) {
     execSync(`npm version ${version} --git-tag-version=false`)
 
 }
-
+console.log(`Version will be deploy: ${version} `)
 
 function getVersion() {
     const pkg = fs.readFileSync('./package.json')
