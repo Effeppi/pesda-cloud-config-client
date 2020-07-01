@@ -17,3 +17,9 @@ test:
 - npm test
 build:
 - npm run build
+prepare_deploy:
+- node script/snapshot-version.js
+deploy:
+  provider: npm
+  email: "NPM_EMAIL"
+  api_key: "NPM_AUTH_TOKEN"
